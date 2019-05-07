@@ -8,9 +8,11 @@ import { StoreModule } from "@ngrx/store";
 
 import { reducers, metaReducers } from "./redux";
 import { FavouritesComponent } from './favourites/favourites.component';
+import { ImageThumbnailComponent } from './image-thumbnail/image-thumbnail.component';
+import { HeartIconComponent } from './heart-icon/heart-icon.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, FavouritesComponent],
+  declarations: [AppComponent, SearchComponent, FavouritesComponent, ImageThumbnailComponent, HeartIconComponent],
   imports: [BrowserModule, AppRoutingModule, StoreModule.forRoot(reducers, { metaReducers })],
   providers: [],
   bootstrap: [AppComponent]

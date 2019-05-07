@@ -1,1 +1,7 @@
-<input #search placeholder="Type to search..." type="search" />
+<input #search placeholder="Type to search..." type="search" [value]="query$ | async" />
+
+<ul>
+  <li *ngFor="let image of images">
+    <app-image-thumbnail [image]="image"></app-image-thumbnail>
+  </li>
+</ul>

@@ -20,7 +20,7 @@ export function logger(reducer: ActionReducer<RootState, RootAction>): ActionRed
   return (state, action) => {
     const result = reducer(state, action);
 
-    console.groupCollapsed(":: Dispatch ::", Object.assign(action, { [Symbol.toStringTag]: "Action" }));
+    console.groupCollapsed(":: Action ::", action);
     console.log("prev state", state);
     console.log("next state", result);
     console.groupEnd();

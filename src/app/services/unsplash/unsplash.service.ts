@@ -18,7 +18,7 @@ export class UnsplashService {
     });
   }
 
-  search(query: string, page: number, itemsPerPage: number): Observable<UnsplashImage> {
+  search(query: string, page: number, itemsPerPage: number): Observable<UnsplashImage[]> {
     return from(
       this.unsplashApi.search
         .photos(query, page, itemsPerPage)
