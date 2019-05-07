@@ -3,15 +3,18 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from "@ngrx/store";
 import { environment } from "src/environments/environment";
 
 import { SearchActionsUnion, searchReducer, SearchState } from "./search";
+import { FavouritesActionUnion, favouritesReducer, FavouritesState } from "./favourites";
 
-export type RootAction = SearchActionsUnion;
+export type RootAction = SearchActionsUnion & FavouritesActionUnion;
 
 export interface RootState {
   search: SearchState;
+  favourites: FavouritesState;
 }
 
 export const reducers: ActionReducerMap<RootState, RootAction> = {
-  search: searchReducer
+  search: searchReducer,
+  favourites: favouritesReducer
 };
 
 export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production ? [logger] : [];
