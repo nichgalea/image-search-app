@@ -1,0 +1,58 @@
+.thumbnail {
+  position: relative;
+  height: 200px;
+  width: 400px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .info {
+      transform: translateY(-50px);
+    }
+
+    img {
+      transform: scale(0.7);
+    }
+  }
+}
+
+img {
+  transition: transform 250ms;
+}
+
+.info {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 50px;
+  background: rgba($color: #545f66, $alpha: 0.5);
+  transition: transform 250ms;
+  color: white;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.author {
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.favourite-button {
+  appearance: none;
+  border: 0;
+  background: 0;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}

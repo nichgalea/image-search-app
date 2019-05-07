@@ -1,0 +1,11 @@
+<div class="thumbnail">
+  <img [src]="image.urls.small" />
+
+  <div class="info">
+    <a class="author" title="Author" href="{{ image.user.links.html }}" target="_blank">{{ image.user.username }}</a>
+
+    <button (click)="addToFavourites()" class="favourite-button" title="Add to favourites">
+      <app-heart-icon [filled]="favourite"></app-heart-icon>
+    </button>
+  </div>
+</div>

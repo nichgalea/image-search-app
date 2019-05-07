@@ -1,0 +1,17 @@
+input {
+  border: none;
+  padding: 16px;
+  width: 100%;
+  font-size: 12px;
+  background-color: #545f66;
+  color: white;
+
+  &::placeholder {
+    color: #d3d4d9;
+    font-style: italic;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
