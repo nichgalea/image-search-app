@@ -8,7 +8,7 @@ export enum SearchActionTypes {
 export class SetSearch implements Action {
   readonly type = SearchActionTypes.SET;
 
-  constructor(public payload: string) {}
+  constructor(public query: string) {}
 }
 
 export class ClearSearch implements Action {

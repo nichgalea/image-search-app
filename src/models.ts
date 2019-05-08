@@ -70,3 +70,9 @@ export interface UnsplashImage {
   user: User;
   tags: any[];
 }
+
+export interface FavouriteGroup {
+  name: string;
+  description: string;
+  list: UnsplashImage[];
+}

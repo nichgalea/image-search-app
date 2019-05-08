@@ -1,0 +1,12 @@
+<button class="close" (click)="close.emit()" title="Close"></button>
+
+<ul class="group-list" #groupList [scrollTop]="groupList.scrollHeight">
+  <li *ngFor="let group of favouritesGroups$ | async; index as i" (click)="selectGroup(i)">
+    {{ group.name }}
+  </li>
+</ul>
+
+<div class="add-new-group">
+  <input #groupNameInput type="text" placeholder="Add new favourites group" [(ngModel)]="newGroupName" />
+  <button (click)="addGroup()" title="Add group">+</button>
+</div>

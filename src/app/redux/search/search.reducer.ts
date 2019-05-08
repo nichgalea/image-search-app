@@ -11,7 +11,7 @@ export function searchReducer(state = initialSearchState, action: SearchActionsU
     case SearchActionTypes.SET:
       return {
         ...state,
-        query: action.payload
+        query: action.query
       };
 
     case SearchActionTypes.CLEAR: {

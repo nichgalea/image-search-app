@@ -1,11 +1,24 @@
 <div class="thumbnail">
-  <img [src]="image.urls.small" />
+  <a [href]="image.links.html" target="_blank" title="Open in Unsplash">
+    <img [src]="image.urls.small" />
+  </a>
 
   <div class="info">
     <a class="author" title="Author" href="{{ image.user.links.html }}" target="_blank">{{ image.user.username }}</a>
 
-    <button (click)="addToFavourites()" class="favourite-button" title="Add to favourites">
-      <app-heart-icon [filled]="favourite"></app-heart-icon>
+    <button
+      *ngIf="!addingToFavourites"
+      (click)="addingToFavourites = true"
+      class="favourite-button"
+      title="Add to favourites"
+    >
+      <app-heart-icon [filled]="isFavourite$ | async"></app-heart-icon>
     </button>
   </div>
+
+  <app-add-favourite
+    *ngIf="addingToFavourites"
+    (close)="addingToFavourites = false"
+    (groupSelect)="addToFavouritesGroup($event)"
+  ></app-add-favourite>
 </div>

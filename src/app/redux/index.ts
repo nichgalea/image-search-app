@@ -1,4 +1,5 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from "@ngrx/store";
+import { storeFreeze } from "ngrx-store-freeze";
 
 import { environment } from "src/environments/environment";
 
@@ -17,7 +18,7 @@ export const reducers: ActionReducerMap<RootState, RootAction> = {
   favourites: favouritesReducer
 };
 
-export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production ? [logger] : [];
+export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production ? [logger, storeFreeze] : [];
 
 export function logger(reducer: ActionReducer<RootState, RootAction>): ActionReducer<RootState, RootAction> {
   return (state, action) => {

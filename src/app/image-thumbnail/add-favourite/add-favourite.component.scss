@@ -1,0 +1,98 @@
+:host {
+  position: absolute;
+  display: block;
+  bottom: 8px;
+  right: 8px;
+  width: calc(50% - 8px);
+  height: calc(50% - 8px);
+  background: rgba($color: white, $alpha: 0.8);
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.group-list {
+  list-style: none;
+  padding: 0;
+  height: calc(100% - 21px);
+  overflow: auto;
+
+  li {
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #171a21;
+    padding: 4px;
+    font-size: 12px;
+
+    &:hover {
+      background: #d3d4d9;
+    }
+  }
+}
+
+.add-new-group {
+  input {
+    border: 0;
+    width: 146px;
+    padding: 4px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    border: 0;
+    border-radius: 5px;
+    background: #545f66;
+    margin-left: 8px;
+    cursor: pointer;
+    color: white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  border: 0;
+  border-radius: 8px;
+  width: 16px;
+  height: 16px;
+  background: #545f66;
+  padding: 0;
+  font-size: 6px;
+  line-height: 0;
+  cursor: pointer;
+
+  &:active {
+    outline: none;
+  }
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 2px;
+    background: white;
+  }
+
+  &:before {
+    transform: rotate(45deg) translate(-4px, -3px);
+  }
+
+  &:after {
+    transform: rotate(-45deg) translate(3px, -4px);
+  }
+}
+
+.no-groups {
+  font-size: 12px;
+  margin: 0;
+}
