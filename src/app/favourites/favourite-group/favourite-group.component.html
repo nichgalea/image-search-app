@@ -15,7 +15,8 @@
     ></textarea>
 
     <div class="app-image-container" *ngFor="let image of group.list">
-      <app-image-thumbnail [image]="image"></app-image-thumbnail>
+      <app-image-thumbnail [image]="image" [download]="true"></app-image-thumbnail>
+
       <button class="remove" (click)="removeImage(image)" title="Remove from this group"></button>
     </div>
   </div>

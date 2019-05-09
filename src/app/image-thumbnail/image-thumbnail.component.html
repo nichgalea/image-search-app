@@ -1,7 +1,9 @@
-<div class="thumbnail">
-  <a [href]="image.links.html" target="_blank" title="Open in Unsplash">
+<div [ngClass]="{ thumbnail: true, downloadable: download }">
+  <a *ngIf="!download" [href]="image.links.html" target="_blank" title="Open in Unsplash">
     <img [src]="image.urls.small" />
   </a>
+
+  <img *ngIf="download" [src]="image.urls.small" title="Click to download" (click)="downloadImage($event)" />
 
   <div class="info">
     <a class="author" title="Author" href="{{ image.user.links.html }}" target="_blank">{{ image.user.username }}</a>

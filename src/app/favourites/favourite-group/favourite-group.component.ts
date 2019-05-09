@@ -48,4 +48,8 @@ export class FavouriteGroupComponent implements OnInit, OnDestroy {
   deleteGroup() {
     this.store.dispatch(new RemoveGroup(this.id));
   }
+
+  downloadImage(image: UnsplashImage) {
+    console.log(image);
+  }
 }

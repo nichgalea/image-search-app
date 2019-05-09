@@ -13,6 +13,7 @@ import { AddImageToGroup } from "../redux/favourites";
 })
 export class ImageThumbnailComponent {
   @Input() image!: UnsplashImage;
+  @Input() download: boolean = false;
 
   isFavourite$!: Observable<boolean>;
   addingToFavourites = false;
@@ -33,5 +34,33 @@ export class ImageThumbnailComponent {
 
   addToFavouritesGroup(groupId: number) {
     this.store.dispatch(new AddImageToGroup(groupId, this.image));
+  }
+
+  downloadImage(event: MouseEvent) {
+    const imageElement = event.target as HTMLImageElement;
+    const imgUrl = new URL(imageElement.src);
+    const format = new URLSearchParams(imgUrl.search).get("fm");
+
+    fetch(imageElement.src)
+      .then(r => r.blob())
+      .then(data => {
+        const filename = `${this.image.id}.${format}`;
+
+        if (navigator.msSaveBlob) {
+          navigator.msSaveBlob(data, filename);
+        } else {
+          const aElement = document.createElement("a");
+
+          aElement.href = URL.createObjectURL(data);
+          aElement.download = filename;
+
+          // needs to be in DOM for FireFox
+          document.body.appendChild(aElement);
+
+          aElement.click();
+
+          document.body.removeChild(aElement);
+        }
+      });
   }
 }

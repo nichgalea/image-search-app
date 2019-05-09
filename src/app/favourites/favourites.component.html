@@ -1,3 +1,5 @@
+<p class="no-favourites" *ngIf="(favouritesGroups$ | async).length === 0">You don't have any favourites</p>
+
 <app-favourite-group
   *ngFor="let group of favouritesGroups$ | async; index as id; trackBy: trackByIndex"
   [id]="id"

@@ -3,3 +3,13 @@
   flex-flow: column nowrap;
   margin: 8px;
 }
+
+.no-favourites {
+  position: absolute;
+  top: 30vh;
+  left: 50vw;
+  transform: translate(-50%);
+  font-size: 26px;
+  color: #d3d4d9;
+  font-style: italic;
+}
