@@ -1,9 +1,9 @@
 <input #search placeholder="Type to search..." type="search" [value]="query$ | async" />
 
-<ul *ngIf="images.length > 0">
-  <li *ngFor="let image of images">
+<ul *ngIf="(results$ | async).length > 0">
+  <li *ngFor="let image of results$ | async">
     <app-image-thumbnail [image]="image"></app-image-thumbnail>
   </li>
 </ul>
 
-<p class="no-results" *ngIf="images.length === 0">There are no results to show</p>
+<p class="no-results" *ngIf="(results$ | async).length === 0">There are no results to show</p>

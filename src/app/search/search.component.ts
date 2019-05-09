@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
-import { fromEvent, Subscription, merge, Observable } from "rxjs";
-import { debounceTime, map, switchMap, tap, take, filter } from "rxjs/operators";
+import { fromEvent, Subscription, Observable, merge } from "rxjs";
+import { map, tap, switchMap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 
 import { UnsplashImage } from "src/models";
 import { UnsplashService } from "src/app/services/unsplash";
 import { RootState } from "src/app/redux";
-import { SetSearch } from "src/app/redux/search";
+import { SetSearchQuery, GetNextResults } from "src/app/redux/search";
 
 @Component({
   selector: "app-search",
@@ -14,44 +14,45 @@ import { SetSearch } from "src/app/redux/search";
   styleUrls: ["./search.component.scss"]
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  images: UnsplashImage[] = [];
+  results$!: Observable<UnsplashImage[]>;
   query$!: Observable<string>;
   subcription$$!: Subscription;
+  page = 0;
 
   @ViewChild("search") searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private store: Store<RootState>, private unsplashService: UnsplashService) {
-    this.searchImages = this.searchImages.bind(this);
-  }
+  constructor(private store: Store<RootState>, private unsplashService: UnsplashService) {}
 
   ngOnInit() {
     this.searchInput.nativeElement.focus();
 
+    this.results$ = this.store.select(state => state.search.results);
     this.query$ = this.store.select(state => state.search.query);
-
-    const restorePreviousResults$ = this.query$.pipe(
-      take(1),
-      filter(query => query.trim().length > 0),
-      switchMap(this.searchImages),
-      tap(images => (this.images = images))
-    );
 
     const input$ = fromEvent(this.searchInput.nativeElement, "input").pipe(
       map(event => (event.target as HTMLInputElement).value),
-      tap(query => this.store.dispatch(new SetSearch(query))),
-      debounceTime(350),
-      switchMap(this.searchImages),
-      tap(images => (this.images = images))
+      tap(query => {
+        this.page = 0;
+        this.store.dispatch(new SetSearchQuery(query));
+      })
     );
 
-    this.subcription$$ = merge(input$, restorePreviousResults$).subscribe();
+    const pageScroll$ = fromEvent(window, "scroll").pipe(
+      tap(() => {
+        const hasReachedBottom =
+          document.documentElement.clientHeight + document.documentElement.scrollTop ===
+          document.documentElement.scrollHeight;
+
+        if (hasReachedBottom) {
+          this.store.dispatch(new GetNextResults(++this.page));
+        }
+      })
+    );
+
+    this.subcription$$ = merge(input$, pageScroll$).subscribe();
   }
 
   ngOnDestroy() {
     this.subcription$$.unsubscribe();
-  }
-
-  searchImages(query: string): Observable<UnsplashImage[]> {
-    return this.unsplashService.search(query, 1, 50);
   }
 }

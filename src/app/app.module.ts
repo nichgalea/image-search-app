@@ -13,6 +13,9 @@ import { FavouriteGroupComponent } from "./favourites/favourite-group";
 import { ImageThumbnailComponent } from "./image-thumbnail/image-thumbnail.component";
 import { HeartIconComponent } from "./image-thumbnail/heart-icon";
 import { AddFavouriteComponent } from "./image-thumbnail/add-favourite";
+import { LoadingComponent } from './loading/loading.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -22,14 +25,16 @@ import { AddFavouriteComponent } from "./image-thumbnail/add-favourite";
     ImageThumbnailComponent,
     HeartIconComponent,
     AddFavouriteComponent,
-    FavouriteGroupComponent
+    FavouriteGroupComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

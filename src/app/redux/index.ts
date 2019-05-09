@@ -6,17 +6,20 @@ import { environment } from "src/environments/environment";
 
 import { SearchActionsUnion, searchReducer, SearchState } from "./search";
 import { FavouritesActionUnion, favouritesReducer, FavouritesState } from "./favourites";
+import { LoadingActionsUnion, loadingReducer, LoadingState } from "./loading";
 
-export type RootAction = SearchActionsUnion & FavouritesActionUnion;
+export type RootAction = SearchActionsUnion | FavouritesActionUnion | LoadingActionsUnion;
 
 export interface RootState {
   search: SearchState;
   favourites: FavouritesState;
+  loading: LoadingState;
 }
 
-export const reducers: ActionReducerMap<RootState, RootAction> = {
+export const reducers: ActionReducerMap<RootState, any> = {
   search: searchReducer,
-  favourites: favouritesReducer
+  favourites: favouritesReducer,
+  loading: loadingReducer
 };
 
 export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production
