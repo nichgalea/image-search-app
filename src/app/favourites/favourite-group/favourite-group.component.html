@@ -1,0 +1,22 @@
+<div class="favourite-group">
+  <div class="group-name">
+    <input [formControl]="groupName" placeholder="Group Name" />
+    <button (click)="openDetails = !openDetails">{{ openDetails ? "Hide" : "Show" }} ({{ group.list.length }})</button>
+    <div [ngClass]="{ 'detail-arrow': true, 'detail-arrow-up': openDetails }"></div>
+    <button class="delete-group" (click)="deleteGroup()" title="Delete this group"></button>
+  </div>
+
+  <div *ngIf="openDetails" class="favourite-details">
+    <textarea
+      name="description"
+      id="description"
+      placeholder="Group Description"
+      [formControl]="groupDescription"
+    ></textarea>
+
+    <div class="app-image-container" *ngFor="let image of group.list">
+      <app-image-thumbnail [image]="image"></app-image-thumbnail>
+      <button class="remove" (click)="removeImage(image)" title="Remove from this group"></button>
+    </div>
+  </div>
+</div>

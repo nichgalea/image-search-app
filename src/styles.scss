@@ -3,3 +3,11 @@ body {
   margin: 0;
   color: #171a21;
 }
+
+input,
+textarea,
+button {
+  &:focus {
+    outline: none;
+  }
+}

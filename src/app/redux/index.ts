@@ -1,5 +1,6 @@
 import { ActionReducer, ActionReducerMap, MetaReducer } from "@ngrx/store";
 import { storeFreeze } from "ngrx-store-freeze";
+import { localStorageSync } from "ngrx-store-localstorage";
 
 import { environment } from "src/environments/environment";
 
@@ -18,9 +19,15 @@ export const reducers: ActionReducerMap<RootState, RootAction> = {
   favourites: favouritesReducer
 };
 
-export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production ? [logger, storeFreeze] : [];
+export const metaReducers: MetaReducer<RootState, RootAction>[] = !environment.production
+  ? [logger, storeFreeze, storage]
+  : [storage];
 
-export function logger(reducer: ActionReducer<RootState, RootAction>): ActionReducer<RootState, RootAction> {
+function storage(reducer: ActionReducer<RootState, RootAction>) {
+  return localStorageSync({ keys: ["favourites"], rehydrate: true })(reducer);
+}
+
+function logger(reducer: ActionReducer<RootState, RootAction>): ActionReducer<RootState, RootAction> {
   return (state, action) => {
     const result = reducer(state, action);
 

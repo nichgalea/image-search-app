@@ -1,3 +1,5 @@
-<p>
-  favourites works!
-</p>
+<app-favourite-group
+  *ngFor="let group of favouritesGroups$ | async; index as id; trackBy: trackByIndex"
+  [id]="id"
+  [group]="group"
+></app-favourite-group>

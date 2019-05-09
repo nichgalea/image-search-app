@@ -1,0 +1,151 @@
+@mixin cross {
+  display: none;
+  border: 0;
+  border-radius: 8px;
+  width: 16px;
+  height: 16px;
+  background: #545f66;
+  padding: 0;
+  font-size: 6px;
+  line-height: 0;
+  cursor: pointer;
+  z-index: 2;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 2px;
+    background: white;
+  }
+
+  &:before {
+    transform: rotate(45deg) translate(-4px, -3px);
+  }
+
+  &:after {
+    transform: rotate(-45deg) translate(3px, -4px);
+  }
+}
+
+:host {
+  margin-bottom: 16px;
+}
+
+.group-name {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    .delete-group {
+      display: block;
+    }
+  }
+
+  .delete-group {
+    @include cross();
+  }
+
+  input {
+    border: 1px solid #d3d4d9;
+    background: #d3d4d9;
+    padding: 8px;
+    color: #171a21;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: border-color 300ms;
+
+    &:focus {
+      border-color: #171a21;
+    }
+  }
+
+  button {
+    width: 60px;
+    height: 28px;
+    padding: 0;
+    margin: 0 8px;
+    border: 0;
+    background: #545f66;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.detail-arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    border: 1px solid #171a21;
+    background: #171a21;
+    content: " ";
+    height: 4px;
+    transition: 300ms transform;
+  }
+
+  &:before {
+    transform: translate(2px, 2px) rotate(-45deg);
+  }
+
+  &:after {
+    transform: translate(5px, 2px) rotate(45deg);
+  }
+
+  &-up {
+    &:before {
+      transform: translate(2px, 2px) rotate(45deg);
+    }
+
+    &:after {
+      transform: translate(5px, 2px) rotate(-45deg);
+    }
+  }
+}
+
+.favourite-details {
+  margin-top: 8px;
+  display: flex;
+  flex-flow: row wrap;
+
+  textarea {
+    resize: none;
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid white;
+    color: #171a21;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-right: 8px;
+    transition: border 300ms;
+
+    &:focus {
+      border: 1px solid #171a21;
+    }
+  }
+
+  .app-image-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+
+    &:hover {
+      .remove {
+        display: block;
+      }
+    }
+
+    .remove {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      @include cross();
+    }
+  }
+}

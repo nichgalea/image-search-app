@@ -36,10 +36,6 @@
     border: 0;
     width: 146px;
     padding: 4px;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   button {
@@ -49,10 +45,6 @@
     margin-left: 8px;
     cursor: pointer;
     color: white;
-
-    &:focus {
-      outline: none;
-    }
   }
 }
 
@@ -69,10 +61,6 @@
   font-size: 6px;
   line-height: 0;
   cursor: pointer;
-
-  &:active {
-    outline: none;
-  }
 
   &:before,
   &:after {

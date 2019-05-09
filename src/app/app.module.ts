@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -9,6 +9,7 @@ import { StoreModule } from "@ngrx/store";
 
 import { reducers, metaReducers } from "./redux";
 import { FavouritesComponent } from "./favourites/favourites.component";
+import { FavouriteGroupComponent } from "./favourites/favourite-group";
 import { ImageThumbnailComponent } from "./image-thumbnail/image-thumbnail.component";
 import { HeartIconComponent } from "./image-thumbnail/heart-icon";
 import { AddFavouriteComponent } from "./image-thumbnail/add-favourite";
@@ -20,9 +21,16 @@ import { AddFavouriteComponent } from "./image-thumbnail/add-favourite";
     FavouritesComponent,
     ImageThumbnailComponent,
     HeartIconComponent,
-    AddFavouriteComponent
+    AddFavouriteComponent,
+    FavouriteGroupComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, StoreModule.forRoot(reducers, { metaReducers })],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, { metaReducers })
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
