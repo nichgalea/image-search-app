@@ -33,20 +33,25 @@
 }
 
 .add-new-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   input {
     border: 0;
-    width: 140px;
     padding: 4px;
+    flex: 0 0 80%;
   }
 
   button {
     border: 0;
     border-radius: 5px;
     background: #545f66;
-    margin-left: 8px;
+    margin-left: 4px;
     cursor: pointer;
     color: white;
     height: 20px;
+    flex: 1 0;
   }
 }
 
